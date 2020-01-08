@@ -1,1 +1,1 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":44:{a:2:{s:7:"defects";a:0:{}s:5:"times";a:0:{}}}
+C:37:"PHPUnit\Runner\DefaultTestResultCache":152:{a:2:{s:7:"defects";a:1:{s:40:"ManagementTest::testShouldSuccesslicense";i:4;}s:5:"times";a:1:{s:40:"ManagementTest::testShouldSuccesslicense";d:0.003;}}}

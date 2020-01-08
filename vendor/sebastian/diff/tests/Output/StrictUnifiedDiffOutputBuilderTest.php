@@ -19,6 +19,8 @@ use SebastianBergmann\Diff\Utils\UnifiedDiffAssertTrait;
  * @covers SebastianBergmann\Diff\Output\StrictUnifiedDiffOutputBuilder
  *
  * @uses SebastianBergmann\Diff\Differ
+ * @uses SebastianBergmann\Diff\TimeEfficientLongestCommonSubsequenceCalculator
+ * @uses SebastianBergmann\Diff\ConfigurationException
  */
 final class StrictUnifiedDiffOutputBuilderTest extends TestCase
 {
@@ -273,7 +275,7 @@ final class StrictUnifiedDiffOutputBuilderTest extends TestCase
 
         $diff = $differ->diff("A\nB\n", "A\nX\n");
         $this->assertSame(
-'--- input.txt
+            '--- input.txt
 +++ output.txt
 @@ -1,2 +1,2 @@
  A

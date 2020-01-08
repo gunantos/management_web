@@ -1,11 +1,12 @@
 language: php
 
-sudo: false
+dist: bionic
 
 php:
   - 7.1
   - 7.2
-  - master
+  - 7.3
+  - 7.4
 
 env:
   matrix:
@@ -30,4 +31,3 @@ after_success:
 
 notifications:
   email: false
-

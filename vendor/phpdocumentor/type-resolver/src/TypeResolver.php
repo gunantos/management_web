@@ -302,6 +302,8 @@ final class TypeResolver
 
     /**
      * Adds a keyword to the list of Keywords and associates it with a specific Value Object.
+     *
+     * @psalm-param class-string<Type> $typeClassName
      */
     public function addKeyword(string $keyword, string $typeClassName) : void
     {
@@ -387,14 +389,15 @@ final class TypeResolver
     /**
      * Resolves the collection values and keys
      *
-     * @return Array_|Collection
+     * @return Array_|Iterable_|Collection
      */
     private function resolveCollection(ArrayIterator $tokens, Type $classType, Context $context) : Type
     {
-        $isArray = ((string) $classType === 'array');
+        $isArray    = ((string) $classType === 'array');
+        $isIterable = ((string) $classType === 'iterable');
 
-        // allow only "array" or class name before "<"
-        if (!$isArray
+        // allow only "array", "iterable" or class name before "<"
+        if (!$isArray && !$isIterable
             && (!$classType instanceof Object_ || $classType->getFqsen() === null)) {
             throw new RuntimeException(
                 $classType . ' is not a collection'
@@ -453,6 +456,10 @@ final class TypeResolver
 
         if ($isArray) {
             return new Array_($valueType, $keyType);
+        }
+
+        if ($isIterable) {
+            return new Iterable_($valueType, $keyType);
         }
 
         /** @psalm-suppress RedundantCondition */

