@@ -31,7 +31,9 @@ Buat atau hasilkan json di URL_JSON anda dengan value
 }
 ```
 
-status bisa diganti dengna
+status bisa diganti dengan
+```
 1. active = berarti dalam keadaan active
 2. nonaktif = aplikasi akan muncul pemberitahuan license mati
 3. hapus = aplikasi akan dihapus dari sistem
+```
