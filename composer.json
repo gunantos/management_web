@@ -1,12 +1,23 @@
 {
     "name": "morait/management_web",
-    "description": "Management and monitoring web aplikation php version",
+    "description": "Management and monitoring web aplikation and license monitorin in php version",
     "type": "library",
+    "keywords": ["manage application","license monitoring"],
     "require-dev": {
         "phpunit/phpunit": "^8.5"
     },
     "license": "MIT",
-    "require": {},
+   "authors": [
+        {
+            "name": "Gunanto Simamora",
+            "email": "gunanto.simamora@gmail.com",
+            "homepage": "https://morait.dev",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
     "scripts": {
         "test": [
             "phpunit --testdox"
