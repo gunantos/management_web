@@ -13,11 +13,4 @@ final class ManagementTest extends TestCase
           morait\management_web\management::initialize()
       );
    }
-   public function testCanBeUsedAsString(): void
-    {
-        $this->assertEquals(
-            'user@example.com',
-            Email::fromString('user@example.com')
-        );
-    }
 }
