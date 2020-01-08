@@ -77,7 +77,8 @@ class Management
     public static function initialize()
     {
       $read = json_decode(Management::curl(Management::$config['url']));
-      Management::_tmp($read);
+      $status = (isset($read->status) ? $read->status : 'demo');
+      Management::_tmp($status);
       return Management::_license();  
     }
 
