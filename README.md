@@ -1,4 +1,5 @@
 ﻿# management_web
+[Document]: https://andtho89.github.io/management_web/
 
 Control dan management license applikasi berbasi web, sehingga dapat mempermudah kita untuk melakukan update, kunci license maupun menghapus aplikasi
 
